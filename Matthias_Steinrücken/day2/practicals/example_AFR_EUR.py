@@ -1,5 +1,4 @@
 
-
 import msprime
 import demesdraw
 from matplotlib import pyplot as plt

@@ -5,6 +5,8 @@ output: html_document
 
 We sequenced several genomes of bears and assigned each individual genotype. What is the frequency of a certain allele at the population level?
 
+TESTING PUSH
+
 ![](Images/BrownBear.jpg)
 
 We have only a sample of the entire population of bears but we want to make inferences at the whole population level.
@@ -68,7 +70,22 @@ Plot the posterior probability, assuming a uniform prior (alpha = beta = 1). The
 What happens to the distribution if we have only 10 samples (with the sample allele frequency of 0.20)?
 
 ```{r}
-#...
+k <- 40
+n <- 200
+
+alpha <- k + 1 
+beta <- n - k + 1 
+  
+post.prob <- dbeta(
+  x = seq(0,1,0.01),
+  shape1 = alpha, #frquency of G
+  shape2 = beta #frequency of A
+)
+
+plot(post.prob)
+
+MAP <- (alpha -1)/(alpha + beta -2)
+print(MAP)
 ```
 
 We can think of a more informative prior. The genome-wide distribution of allele frequencies for human populations as a particular shape. This is called a site frequency spectrum (SFS) or allele frequency spectrum (AFS).
@@ -90,7 +107,21 @@ Recalculate the posterior distribution of $p$ using an informative prior (make y
 Discuss how these results compare to the previous ones obtained in point A.
 
 ```{r}
-#...
+#our prior is that the derived allele is unlikely to be picked (rare)
+alpha <- k + 0
+beta <- n - k + 1 
+
+post.prob <- dbeta(
+  x = seq(0,1,0.01),
+  shape1 = alpha, #frquency of G
+  shape2 = beta #frequency of A
+)
+
+plot(post.prob)
+
+MAP <- (alpha -1)/(alpha + beta -2)
+print(MAP)
+
 ```
 
 **C)** (bonus)

@@ -1,13 +1,13 @@
 rm(list=ls());
 
-folder.fastSimcoal2 <- "C:\\Users\\u9424\\OneDrive - Universitat Pompeu Fabra\\Grants\\2025\\EMBO Naples June\\Second day\\Afternoon\\Practical\\";
+folder.fastSimcoal2 <- "/home/mogollon/embo_popgen_2025_elisa/Oscar_Lao/Afternoon/";
 
 setwd(folder.fastSimcoal2);
 
 # b) assuming a constant population size A with a recent population change
 model.single.pop.with.recent.population.change.tMRCA <- function(population_size_in_present, effective_population_size_1, time_change_population_size, number_of_blocks)
 {
-  ex <- paste(folder.fastSimcoal2,"DemographicModelSplitR\\" ,"DemographicModelSplitR_mrca.txt",sep="");
+  ex <- paste(folder.fastSimcoal2,"DemographicModelSplitR" ,"DemographicModelSplitR_mrca.txt",sep="");
   if (file.exists(ex)) {
     file.remove(ex)
   }  
@@ -46,11 +46,11 @@ model.single.pop.with.recent.population.change.tMRCA <- function(population_size
   # Write to file
   writeLines(lines, "DemographicModelSplitR.par")
   
-  exe <- ".\\fsc28.exe"
-  args <- c("-i", ".\\DemographicModelSplitR.par", "-x", "-s0", "-n", "1", "-q", "--recordMRCA")
+  exe <- "fsc28"
+  args <- c("-i", "DemographicModelSplitR.par", "-x", "-s0", "-n", "1", "-q", "--recordMRCA")
   # Execute
   system2(exe, args = args);
-  data.t <- read.table(file=paste(folder.fastSimcoal2,"\\DemographicModelSplitR\\DemographicModelSplitR_mrca.txt", sep=""), header = T, skip = 4);
+  data.t <- read.table(file=paste(folder.fastSimcoal2,"/DemographicModelSplitR/DemographicModelSplitR_mrca.txt", sep=""), header = T, skip = 4);
   return(data.t);
 }
 
